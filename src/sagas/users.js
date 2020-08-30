@@ -1,16 +1,16 @@
-import { takeEvery, call, fork } from "redux-saga/effects";
-import * as actions from "../actions/users";
-import * as api from "../api/users";
+import { takeEvery, takeLatest, call, fork, put } from 'redux-saga/effects';
+import * as actions from '../actions/users';
+import * as api from '../api/users';
 
 // worker saga function
 function* getUsers() {
-  let result = yield call(api.getUsers);
-  console.log(result);
   try {
+    let {
+      data: { data },
+    } = yield call(api.getUsers);
+    yield put(actions.getUsersSuccess({ items: data }));
   } catch (error) {
-    console.log("====================================");
     console.log(error);
-    console.log("====================================");
   }
 }
 

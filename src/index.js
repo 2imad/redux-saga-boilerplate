@@ -1,20 +1,21 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./components/App";
-import reducers from "./reducers";
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import createSagaMiddleware from "redux-saga";
-import rootSaga from "./sagas";
-import * as serviceWorker from "./serviceWorker";
-import axios from "axios";
-import { composeWithDevTools } from "redux-devtools-extension";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/App';
+import reducers from './reducers';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './sagas';
+import * as serviceWorker from './serviceWorker';
+import axios from 'axios';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = "http://rem-rest-api.herokuapp.com/api/";
+axios.defaults.baseURL = 'http://rem-rest-api.herokuapp.com/api/';
 // eslint-disable-next-line
 const alternativeURL =
-  "https://cors-anywhere.herokuapp.com/https://rem.dbwebb.se/api";
+  'https://cors-anywhere.herokuapp.com/https://rem.dbwebb.se/api';
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   reducers,
@@ -27,7 +28,7 @@ ReactDOM.render(
       <App />
     </Provider>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
 
 serviceWorker.unregister();
