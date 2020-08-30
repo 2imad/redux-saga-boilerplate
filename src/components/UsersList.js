@@ -1,7 +1,7 @@
 import React from 'react';
 import { ListGroup, ListGroupItem, Button, InputGroup } from 'reactstrap';
 
-const UsersList = ({ users }) => {
+const UsersList = ({ users, onUserDelete }) => {
   const sortByName = (a, b) => {
     const nameA = a.firstName.toUpperCase();
     const nameB = b.firstName.toUpperCase();
@@ -17,6 +17,7 @@ const UsersList = ({ users }) => {
     }
     return 0;
   };
+
   return (
     <ListGroup className="user-list">
       <div className="user-wrapper">
@@ -27,7 +28,16 @@ const UsersList = ({ users }) => {
                 {u.firstName} {u.lastName}
               </div>
               <div>
-                <Button outline color="danger">
+                <Button onClick={() => console.log(u)} outline color="warning">
+                  Update
+                </Button>
+              </div>
+              <div>
+                <Button
+                  onClick={() => onUserDelete({ id: u.id })}
+                  outline
+                  color="danger"
+                >
                   Delete
                 </Button>
               </div>

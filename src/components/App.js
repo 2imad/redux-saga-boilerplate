@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getUsersRequest, createUsersRequest } from '../actions/users';
+import {
+  getUsersRequest,
+  createUsersRequest,
+  deleteUserRequest,
+} from '../actions/users';
 import UsersList from './UsersList';
 import '../styles/main.css';
 import AppForm from './UserForm';
@@ -13,12 +17,18 @@ class App extends Component {
   onFormSubmit = ({ firstName, lastName }) => {
     this.props.createUsersRequest({ firstName, lastName });
   };
+  onUserDelete = (id) => {
+    this.props.deleteUserRequest(id);
+  };
   render() {
     return (
       <div className="main">
         <div className="wrapper">
           <AppForm onFormSubmit={this.onFormSubmit} />
-          <UsersList users={this.props.users.items} />
+          <UsersList
+            users={this.props.users.items}
+            onUserDelete={this.onUserDelete}
+          />
         </div>
       </div>
     );
@@ -28,4 +38,5 @@ class App extends Component {
 export default connect(({ users }) => ({ users }), {
   getUsersRequest,
   createUsersRequest,
+  deleteUserRequest,
 })(App);
