@@ -1,18 +1,23 @@
-import React, { Component } from 'react';
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 class AppForm extends Component {
-  state = {
-    firstName: '',
-    lastName: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstName: "",
+      lastName: "",
+    };
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     const { firstName, lastName } = this.state;
     this.props.onFormSubmit({ firstName, lastName });
     this.setState({
-      firstName: '',
-      lastName: '',
+      firstName: "",
+      lastName: "",
     });
   };
   handleFormChange = (e) => {
@@ -21,7 +26,18 @@ class AppForm extends Component {
       [name]: e.target.value,
     });
   };
+
+  handleFormEdit = () => {
+    if (this.props.user) {
+      this.setState({
+        firstName: this.props.user.firstName,
+        lastName: this.props.user.lastName,
+      });
+    }
+  };
+
   render() {
+    console.log("RENDER", this.props.user);
     return (
       <div className="user-form">
         <Form className="user-input-form" onSubmit={this.handleSubmit}>
@@ -56,4 +72,6 @@ class AppForm extends Component {
   }
 }
 
-export default AppForm;
+const mapStateToProps = (state) => ({ user: state.users.item });
+
+export default connect(mapStateToProps)(AppForm);

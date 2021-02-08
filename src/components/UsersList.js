@@ -1,7 +1,7 @@
-import React from 'react';
-import { ListGroup, ListGroupItem, Button, InputGroup } from 'reactstrap';
+import React from "react";
+import { ListGroup, ListGroupItem, Button, InputGroup } from "reactstrap";
 
-const UsersList = ({ users, onUserDelete }) => {
+const UsersList = ({ users, onUserDelete, onUpdateUser }) => {
   const sortByName = (a, b) => {
     const nameA = a.firstName.toUpperCase();
     const nameB = b.firstName.toUpperCase();
@@ -28,7 +28,7 @@ const UsersList = ({ users, onUserDelete }) => {
                 {u.firstName} {u.lastName}
               </div>
               <div>
-                <Button onClick={() => console.log(u)} outline color="warning">
+                <Button onClick={() => onUpdateUser(u)} outline color="warning">
                   Update
                 </Button>
               </div>

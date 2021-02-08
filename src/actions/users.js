@@ -1,8 +1,10 @@
 export const Types = {
-  GET_USERS_REQUEST: 'users/get_users_request',
-  GET_USERS_SUCCESS: 'users/get_users_success',
-  CREATE_USERS_REQUEST: 'users/create_users_request',
-  DELETE_USER_REQUEST: 'users/delete_user_request',
+  GET_USERS_REQUEST: "users/get_users_request",
+  GET_USERS_SUCCESS: "users/get_users_success",
+  CREATE_USERS_REQUEST: "users/create_users_request",
+  DELETE_USER_REQUEST: "users/delete_user_request",
+  SET_UPDATE_USER: "users/set_update_user",
+  UPDATE_USER: "users/update_user",
 };
 
 export const getUsersRequest = () => ({
@@ -24,4 +26,8 @@ export const createUsersRequest = ({ firstName, lastName }) => ({
     firstName,
     lastName,
   },
+});
+export const setUpdateUserRequest = (user) => ({
+  type: Types.SET_UPDATE_USER,
+  payload: user,
 });
